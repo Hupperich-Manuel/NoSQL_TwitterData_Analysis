@@ -21,7 +21,14 @@
 
 ## ABSTRACT
 
-This project is about analyzing the tweets injected during the period leading up to the start of the Christmas shopping season named *Black Friday*. The purpose was to get insight about the users behaviours during this time, and see if there is a clear pattern that indicates how not only companies, but also individual users try to profit from this period, increasing their presence in this social media. This project was done by a team, for study purposes.
+This project is about analyzing the tweets injected during the period leading up to the start of the Christmas shopping season named *Black Friday*. The purpose was to get insight about the users behaviours during this time, and see if there is a clear pattern that indicates how not only companies, but also individual users try to profit from this period, increasing their presence in this social media. This project was done by a team, for study purposes. Notice that this is only a small part of the overall analysis, and it is only aimed to show how versatile semistructured data can become when getting deeper into it.
+
+
+# Table of Contents
+1. [SETTING UP](#Installing Libraries:)
+2. [ANALYSIS](#Total Tweets per Minute per Day:)
+3. [CONCLUSION](# Wrapping up)
+
 
 <h1 align="center">
     <font size="15">
@@ -126,7 +133,21 @@ tweets_raw = tweets_raw\
 ```
 
 
-### 1.5. Total Tweets per Minute per Day:
+<h1 align="center">
+    <font size="15">
+        <u>ANALYSIS</u>
+    </font>
+
+</h1>
+
+
+The division of the analysis can be splitted into three major parts:
+* Overall
+* Users
+* Content
+
+
+### Total Tweets per Minute per Day:
 
 The main purpose was to extract the number of tweets per minute, during our ingestion. To do so we used user defined functions
 of Spark SQL (UDF) in a lambda function, using the library IntegerType(), converting the datetime into integers* that then can be grouped by.
@@ -155,7 +176,7 @@ tweet_per_minute = tweet_per_minute.groupby("day")["count"].sum()/tweet_per_minu
 </kbd>
 </p>
 
-### 2.4. Number of Friends per User
+### Number of Friends per User
 
 In the code below we will identify the accounts that have the most friends (the accounts that follow the highest number of accounts), that have at least tweeted once during the ingestion time.
 
@@ -170,7 +191,7 @@ In the code below we will identify the accounts that have the most friends (the 
 </kbd>
 </p>
 
-### 2.5. Number of Followers per User
+### Number of Followers per User
 
 In the code below we will identify the accounts* who have the most followers (the number of accounts that follow this specific account), that have at least tweeted once during the ingestion time.
 
@@ -244,7 +265,7 @@ plt.show()
 </p>
 
 
-### 2.7. Number of users per Day
+### Number of users per Day
 
 The code seeks to show the percentage of unique users that actively posted __per day__. One user might post on each ingestion day, but there is evidence that the highest number of users interacted on the _Black Friday_.
 
@@ -278,7 +299,7 @@ plt.ylabel("Users per day (%)", size=15)
 </kbd>
 </p>
 
-### 3.2. Most Common Words:
+### Most Common Words:
 
 The scope of the analysis is to find out what were the most used words during the _Black Friday_ ingestion week, and see if there are interesting insights that reveal the interests of the users in this specific period of time
 
@@ -368,16 +389,15 @@ plt.title("Most used words", size=20)
 </kbd>
 </p>
 
-### 3.2. Reference of the most Retweeted Tweets:
+### Reference of the most Retweeted Tweets:
 
 The focus of this analysis was to identify which was the most referenced account during the injestion week.
 * The approach was starting by filtering what were the most *quoted* tweets. This means that the *text* either is created or retweeted (in this case the text will be preceeded by a *RT*).
 * The regex library, allows straighforwardly scrap the first reference of the filtered texts:
-<h1 align="center">
-    <sub>
-        <font size=">
-            "RT <span style="color:blue">@Pyspark</span>  
-{font-size: 75; is the main framework when dealing with Big Data}
+
+<p align ="center">
+    <sub>"RT <u>@Pyspark</u>  is the main framework when dealing with Big Data"</sub>
+</p>
 
 ```python
 #Filter by text and count the number of "quote_count" each distinct text. Order "quote_count" in descending order.
@@ -410,12 +430,43 @@ plt.title(" '@' References of the most retweeted tweets", size=20)
 
 
 
-<h1>
-    I am <span; font-size:.2;">LOVE!</span>
+### Tweets per Country:
+
+To prove the correctness of our injestion, there was a need to identify the distribution of total tweets per region.
+
+The approach of the mapping helps to see where the users are supposed to be tweeting from.
+For this analysis the coordinates attribute was used
+Coordinates were saved in a table together with the country code (so that each location marker is labeled on the map).
+Then using _folium_, this information can be illustrated on the map.
+Notice a funny insight, there is one marker that is located at _Guam Island_ which is in the middle of the Pacific Ocean.
+Another thing to point out is that, since the ingestion was mostly done on the rush hours of the American market, we see that most tweets were gathered with "US" as its _country code_.
+
+
+<p align="center">
+   <kbd>
+        <img src= "https://user-images.githubusercontent.com/67901472/148214377-c104ec29-9e4f-460d-b075-a8fcd9979bff.png" width="600" height="400">
+    </kbd>
+</p>
+
+<h1 align="center">
+    <font size="15">
+        <u>CONCLUSION</u>
+    </font>
+
 </h1>
 
+# Wrapping up
+To conclude there is clear evidence that the presence users and tweets clearly increase in number oximating to _Black Friday_
 
+To conclude there is clear evidence that the activity on twitter related to the keywords: __#BlackFriday__, __BlackFriday__, __#blackfriday__, __blackfriday__, increased as _Black Friday_ weekend was approaching. 
 
+In our analysis we covered the different users attributes that at least interacted once during this period. Those went from users per day rate to the verified and their friends and followers distribution.
+
+Regarding the content of tweets, we found that there is a wide variety in the usage of characters, as the famous __emojis__, locations where these tweets actually have their origin; and also the length of the tweets.
+
+Closer to _Black Friday_, the number of mentions "__@__" and references to discounts increased sharply.
+
+Finally since this is a major event globally, through our data we were able to identify that many users took the opportunity to ride the _Black Friday wave_ to post unrelated topics aiming to gain attraction from a global audience.
 
 
 
