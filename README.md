@@ -25,9 +25,9 @@ This project is about analyzing the tweets injected during the period leading up
 
 
 # Table of Contents
-1. [SETTING UP](#Installing Libraries:)
-2. [ANALYSIS](#Total Tweets per Minute per Day:)
-3. [CONCLUSION](# Wrapping up)
+1. [SETTING UP](#Installing)
+2. [ANALYSIS](#Tweets)
+3. [CONCLUSION](#Wrapping)
 
 
 <h1 align="center">
@@ -37,7 +37,7 @@ This project is about analyzing the tweets injected during the period leading up
 
 </h1>
 
-#### Installing Libraries:
+#### Installing
 
 In order to run this code most of you will have to install previsuly the next packages:
 ```
@@ -146,6 +146,7 @@ The division of the analysis can be splitted into three major parts:
 * Users
 * Content
 
+# Tweets
 
 ### Total Tweets per Minute per Day:
 
@@ -455,7 +456,7 @@ Another thing to point out is that, since the ingestion was mostly done on the r
 
 </h1>
 
-# Wrapping up
+# Wrapping
 To conclude there is clear evidence that the presence users and tweets clearly increase in number oximating to _Black Friday_
 
 To conclude there is clear evidence that the activity on twitter related to the keywords: __#BlackFriday__, __BlackFriday__, __#blackfriday__, __blackfriday__, increased as _Black Friday_ weekend was approaching. 
